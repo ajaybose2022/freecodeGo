@@ -17,6 +17,18 @@ var (
 
 )
 */
+
+const (
+	KB = 1 << (10 * iota)
+	MB
+	GB
+	TB
+	PB
+	EB
+	ZB
+	YB
+)
+
 func main() {
 	var i int = 42
 	var j float32
@@ -94,5 +106,18 @@ func main() {
 
 	ru := 'a'
 	fmt.Printf("%v, %T\n", ru, ru)
+
+	// Constants
+
+	fileSize := 412345707080930023670.
+
+	fmt.Printf("%.2fKB \n", fileSize/KB)
+	fmt.Printf("%.2fMB \n", fileSize/MB)
+	fmt.Printf("%.2fGB \n", fileSize/GB)
+	fmt.Printf("%.2fTB \n", fileSize/TB)
+	fmt.Printf("%.2fPB \n", fileSize/PB)
+	fmt.Printf("%.2fEB \n", fileSize/EB)
+	fmt.Printf("%.2fZB \n", fileSize/ZB)
+	fmt.Printf("%.2fYB \n", fileSize/YB)
 
 }

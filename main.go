@@ -85,9 +85,14 @@ func main() {
 
 	// Strings
 
-	s := "This is a string"
-	by := []byte(s)
-	fmt.Printf("%v, %T\n", s, s)
+	st := "This is a string"
+	by := []byte(st)
+	fmt.Printf("%v, %T\n", st, st)
 	fmt.Printf("%v, %T\n", by, by)
+
+	// Rune
+
+	ru := 'a'
+	fmt.Printf("%v, %T\n", ru, ru)
 
 }

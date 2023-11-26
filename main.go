@@ -150,4 +150,28 @@ func main() {
 	fmt.Printf("array1 : %v\n", array1)
 	fmt.Printf("array2 : %v\n", array2)
 	fmt.Printf("array3 : %v\n", array3)
+
+	// Slices
+
+	var slice1 = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	slice2 := slice1[:]
+	slice3 := slice1[3:]
+	slice4 := slice1[:6]
+	slice5 := slice1[3:6]
+	fmt.Println(slice1)
+	fmt.Println(slice2)
+	fmt.Println(slice3)
+	fmt.Println(slice4)
+	fmt.Println(slice5)
+	fmt.Printf("Length : %v\n", len(slice1))
+	fmt.Printf("Capacity : %v\n", cap(slice1))
+
+	intSlice := make([]int, 3, 20)
+	fmt.Println(intSlice)
+	fmt.Printf("Length : %v\n", len(intSlice))
+	fmt.Printf("Capacity : %v\n", cap(intSlice))
+	intSlice = append(intSlice, 1)
+	fmt.Printf("Length : %v\n", len(intSlice))
+	fmt.Printf("Capacity : %v\n", cap(intSlice))
+
 }

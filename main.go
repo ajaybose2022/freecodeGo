@@ -120,4 +120,34 @@ func main() {
 	fmt.Printf("%.2fZB \n", fileSize/ZB)
 	fmt.Printf("%.2fYB \n", fileSize/YB)
 
+	// Arrays
+
+	grades := [3]uint8{97, 85, 93}
+	grades1 := [...]uint8{97, 85, 93, 88} // ... specifies, any size
+	fmt.Printf("Grades  : %v\n", grades)
+	fmt.Printf("Grades1 : %v\n", grades1)
+
+	var students [3]string
+	fmt.Printf("Students : %v\n", students)
+	students[0] = "Lisa"
+	students[1] = "Ahmed"
+	students[2] = "Arnold"
+	fmt.Printf("Students : %v\n", students)
+	fmt.Printf("Students #1: %v\n", students[1])
+	fmt.Printf("Number of Students : %v\n", len(students))
+
+	var identityMatrix [3][3]int = [3][3]int{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}
+	fmt.Println(identityMatrix)
+
+	var array1 = [...]int{1, 2, 3}
+	var array2 = array1
+	var array3 = &array1
+	array2[1] = 8
+	fmt.Printf("array1 : %v\n", array1)
+	fmt.Printf("array2 : %v\n", array2)
+	fmt.Printf("array3 : %v\n", array3)
+	array3[2] = 76
+	fmt.Printf("array1 : %v\n", array1)
+	fmt.Printf("array2 : %v\n", array2)
+	fmt.Printf("array3 : %v\n", array3)
 }

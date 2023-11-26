@@ -174,4 +174,27 @@ func main() {
 	fmt.Printf("Length : %v\n", len(intSlice))
 	fmt.Printf("Capacity : %v\n", cap(intSlice))
 
+	//maps - slice can never be a type of map
+
+	statePopulations := map[string]int{
+		"California":   39250017,
+		"Texas":        2786596,
+		"Florida":      20612439,
+		"New York":     19745289,
+		"Pennsylvania": 12802503,
+		"Illinois":     12801539,
+		"Ohio":         11614373,
+	}
+
+	fmt.Println(statePopulations)
+
+	statePopulations["Georgia"] = 10310371
+	fmt.Println(statePopulations)
+	_, isIllinoisPresent := statePopulations["Illinois"]
+	fmt.Println(isIllinoisPresent)
+	delete(statePopulations, "Illinois")
+	fmt.Println(statePopulations)
+	_, isIllinoisPresent = statePopulations["Illinois"]
+	fmt.Println(isIllinoisPresent)
+
 }

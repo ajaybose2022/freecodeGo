@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"reflect"
 	"strconv"
 )
 
@@ -39,7 +40,7 @@ type Doctor struct {
 //Inheritance is not present, only use embedded
 
 type Animal struct {
-	Name   string
+	Name   string `required max:"100"`
 	Origin string
 }
 type Bird struct {
@@ -262,4 +263,9 @@ func main() {
 	}
 
 	fmt.Println(thirdBird)
+
+	tag := reflect.TypeOf(Animal{})
+	field, _ := tag.FieldByName("Name")
+	fmt.Println(field.Tag)
+
 }

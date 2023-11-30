@@ -29,6 +29,25 @@ const (
 	YB
 )
 
+type Doctor struct {
+	number     uint8
+	actorName  string
+	episodes   []string
+	companions []string
+}
+
+//Inheritance is not present, only use embedded
+
+type Animal struct {
+	Name   string
+	Origin string
+}
+type Bird struct {
+	Animal
+	SpeedKPH float32
+	CanFly   bool
+}
+
 func main() {
 	var i int = 42
 	var j float32
@@ -197,4 +216,50 @@ func main() {
 	_, isIllinoisPresent = statePopulations["Illinois"]
 	fmt.Println(isIllinoisPresent)
 
+	// Struct can use field name as well as positional, but recommended to use named field
+	aDoctor := Doctor{
+		number:    3,
+		actorName: "Jon Pertwee",
+		//episodes:  []string{}, -- Named Field gives flexiblity to not use null
+		companions: []string{
+			"Liz Shaw",
+			"Jo Grant",
+			"Sarah Jane Smith",
+		},
+	}
+	fmt.Println(aDoctor)
+	fmt.Println(aDoctor.companions)
+
+	anotherDoctor := aDoctor
+
+	fmt.Println(anotherDoctor.actorName)
+	anotherDoctor.actorName = "Tom Baker"
+	fmt.Println(aDoctor.actorName)
+	fmt.Println(anotherDoctor.actorName)
+
+	var firstBird Bird
+
+	firstBird.Animal.Name = "Emu"         // if we want to mimic inheritance
+	firstBird.Animal.Origin = "Australia" // if we want to mimic inheritance
+	firstBird.CanFly = false
+	firstBird.SpeedKPH = 48
+
+	fmt.Println(firstBird)
+
+	var secondBird Bird
+
+	secondBird.Name = "Peacock"
+	secondBird.Origin = "India"
+	secondBird.CanFly = true
+	secondBird.SpeedKPH = 24
+
+	fmt.Println(secondBird)
+
+	thirdBird := Bird{
+		Animal:   Animal{Name: "Penguin", Origin: "Alaska"},
+		SpeedKPH: 21,
+		CanFly:   false,
+	}
+
+	fmt.Println(thirdBird)
 }

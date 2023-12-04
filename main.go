@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"reflect"
 	"strconv"
 )
@@ -275,8 +276,8 @@ func main() {
 	//If Statement
 
 	number := 50
-	guess := 50
-	if guess < 1 || guess > 100 {
+	guess := 30
+	if guess < 1 || !(returnTrue()) || guess > 100 {
 		fmt.Println("The guess must be between 1 and 100 !")
 	} else if guess > 1 && guess <= 100 {
 		if guess < number {
@@ -288,4 +289,33 @@ func main() {
 		}
 		fmt.Println(guess < number, guess > number, guess == number)
 	}
+	if validateNumber(0.456789) {
+		fmt.Println("They are the same")
+	} else {
+		fmt.Println("They are the different")
+	}
+	// Switch Statements
+
+	switchNumber := 10
+	switch switchNumber {
+	case 1:
+		fmt.Println("one")
+	case 2:
+		fmt.Println("two")
+	case 3, 4, 5:
+		fmt.Println("three, four or five")
+	//case switchNumber <= 10:
+	//		fmt.Println("less than 20")
+	default:
+		fmt.Println("other number")
+	}
+
+}
+func returnTrue() bool {
+	fmt.Println("Returning True")
+	return true
+}
+
+func validateNumber(number float64) bool {
+	return math.Abs(number/math.Pow(math.Sqrt(number), 2)-1) < 0.001
 }

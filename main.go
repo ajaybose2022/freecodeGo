@@ -40,7 +40,7 @@ type Doctor struct {
 //Inheritance is not present, only use embedded
 
 type Animal struct {
-	Name   string `required max:"100"`
+	Name   string `validate:"required max:100"` //`json:"gender" validate:"required,gender_custom_validation"`
 	Origin string
 }
 type Bird struct {
@@ -221,7 +221,10 @@ func main() {
 	aDoctor := Doctor{
 		number:    3,
 		actorName: "Jon Pertwee",
-		//episodes:  []string{}, -- Named Field gives flexiblity to not use null
+		episodes: []string{
+			"1",
+			"2",
+		}, // Named Field gives flexiblity to not use null
 		companions: []string{
 			"Liz Shaw",
 			"Jo Grant",
@@ -268,4 +271,21 @@ func main() {
 	field, _ := tag.FieldByName("Name")
 	fmt.Println(field.Tag)
 
+	// Control Flow
+	//If Statement
+
+	number := 50
+	guess := 50
+	if guess < 1 || guess > 100 {
+		fmt.Println("The guess must be between 1 and 100 !")
+	} else if guess > 1 && guess <= 100 {
+		if guess < number {
+			fmt.Println("Low")
+		} else if guess > number {
+			fmt.Println("High")
+		} else if guess == number {
+			fmt.Println("You have got it")
+		}
+		fmt.Println(guess < number, guess > number, guess == number)
+	}
 }

@@ -388,6 +388,18 @@ Loop: //Labels
 	for k, v := range statePopulations {
 		fmt.Printf("State: %s\tPopulation: %d\n", k, v)
 	}
+
+	//Printing only Keys
+
+	for k := range statePopulations {
+		fmt.Printf("Keys - State: %s\n", k)
+	}
+
+	//Printing only values
+
+	for _, v := range statePopulations {
+		fmt.Printf("Values - Population: %d\n", v)
+	}
 }
 func returnTrue() bool {
 	fmt.Println("Returning True")

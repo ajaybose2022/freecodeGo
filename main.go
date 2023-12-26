@@ -295,7 +295,8 @@ func main() {
 		fmt.Println("They are the different")
 	}
 	// Switch Statements
-
+	// break is implicitly implied
+	// fallthrough to override break statement
 	switchNumber := 10
 	switch switchNumber {
 	case 1:
@@ -308,6 +309,18 @@ func main() {
 	//		fmt.Println("less than 20")
 	default:
 		fmt.Println("other number")
+	}
+
+	var interF interface{} = 1.0
+	switch interF.(type) {
+	case int:
+		fmt.Println("It is of type int")
+	case float64:
+		fmt.Println("It is of type float64")
+	case string:
+		fmt.Println("It is of type String")
+	default:
+		fmt.Println("It is of other type")
 	}
 
 }

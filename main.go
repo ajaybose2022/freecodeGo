@@ -400,6 +400,28 @@ Loop: //Labels
 	for _, v := range statePopulations {
 		fmt.Printf("Values - Population: %d\n", v)
 	}
+
+	// Control Flow
+	// Defer
+	// Panic
+	// Recover
+
+	//Defer - Last In First Out
+
+	defer fmt.Println("start")
+	defer fmt.Println("middle") //Defer
+	defer fmt.Println("end")
+
+	// Deferring Variable
+
+	loopingVar = 0
+	fmt.Printf("Value before Defering = %d\n", loopingVar)
+	defer fmt.Printf("Value in deferring call = %d\n", loopingVar)
+	loopingVar = 10
+	fmt.Printf("Value after Defering = %d\n", loopingVar)
+
+	//fmt.Println("Calling ReadRobots")
+	//readRobots() //commenting as too much noise.
 }
 func returnTrue() bool {
 	fmt.Println("Returning True")
@@ -409,3 +431,16 @@ func returnTrue() bool {
 func validateNumber(number float64) bool {
 	return math.Abs(number/math.Pow(math.Sqrt(number), 2)-1) < 0.001
 }
+
+/*func readRobots() {
+	res, err := http.Get("http://www.google.com/robots.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	robots, err := io.ReadAll(res.Body)
+	res.Body.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s\n", robots)
+}*/

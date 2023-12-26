@@ -323,6 +323,71 @@ func main() {
 		fmt.Println("It is of other type")
 	}
 
+	// Looping
+
+	//basic loop
+
+	for i := 0; i < 5; i++ {
+		fmt.Println(i)
+	}
+
+	// multiple variables
+	// increment operation is not an expression, but a statement
+
+	for i, j := 0, 0; i < 5; i, j = i+1, j+2 {
+		fmt.Printf("i = %d, j=%d \n", i, j)
+	}
+
+	// Go doesn't have do while loop
+	// Here is the alternative
+
+	loopingVar := 0 // Initialize the variable out gives Scope at the function level and not at loop level
+
+	for loopingVar < 5 {
+		fmt.Println(loopingVar)
+		loopingVar++
+	}
+	fmt.Printf("Printing the loopingVar outside the loop : %d\n", loopingVar)
+
+	//do while infinte statements
+	fmt.Println("Do While Logic")
+	loopingVar = 0
+	for {
+		if loopingVar == 5 {
+			loopingVar++
+			continue
+		}
+		if loopingVar == 10 {
+			break
+		}
+		fmt.Println(loopingVar)
+		loopingVar++
+	}
+
+	//Nested Looping
+	fmt.Println("Nested Loops")
+Loop: //Labels
+	for i := 1; i <= 3; i++ {
+		for j := 1; j <= 3; j++ {
+			fmt.Println(i * j)
+			if i*j >= 3 {
+				break Loop
+			}
+		}
+	}
+
+	// Collections
+
+	collectionS := []int{1, 2, 3}
+	fmt.Println(collectionS)
+	//for range loop
+	for k, v := range collectionS {
+		fmt.Println(k, v)
+	}
+	fmt.Println("Printing statePopulations using for ranges")
+	for k, v := range statePopulations {
+		fmt.Printf("State: %s\tPopulation: %d\n", k, v)
+	}
 }
 func returnTrue() bool {
 	fmt.Println("Returning True")

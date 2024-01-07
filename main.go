@@ -2,7 +2,10 @@ package main
 
 import (
 	"fmt"
+	"io"
+	"log"
 	"math"
+	"net/http"
 	"reflect"
 	"strconv"
 )
@@ -403,8 +406,8 @@ Loop: //Labels
 
 	// Control Flow
 	// Defer
-	// Panic
-	// Recover
+	// Panic - Error happens, throw the exception
+	// Recover - Recover ( Handle the error)
 
 	//Defer - Last In First Out
 
@@ -420,8 +423,57 @@ Loop: //Labels
 	loopingVar = 10
 	fmt.Printf("Value after Defering = %d\n", loopingVar)
 
-	//fmt.Println("Calling ReadRobots")
-	//readRobots() //commenting as too much noise.
+	fmt.Println("Calling ReadRobots")
+	readRobots() //commenting as too much noise.
+
+	// Pointers
+	// Functions
+	// capital in the first letter means public scope
+	fmt.Println("")
+	fmt.Println("Functions")
+	fmt.Println("")
+	sayMessage("Hello Go!!!")
+	sayGreeting("Hello", "Stacey")
+
+	sumResult := sumInt(1, 2, 3, 4, 5)
+	fmt.Println("The Sum is : ", sumResult)
+
+	divideResult, err := divideFloat(5.0, 2.0)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Printf("\nThe result of Division is :%f\n", divideResult)
+
+	zeroResult, err := divideFloat(5.0, 0.0)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Printf("\nThe result of zero Division is :%f\n", zeroResult)
+}
+func sayMessage(msg string) {
+	fmt.Println(msg)
+}
+func sayGreeting(msg, name string) {
+	fmt.Println(msg, name)
+}
+
+// Input range of integers
+// Output int
+func sumInt(values ...int) int {
+	result := 0
+	for _, v := range values {
+		result += v
+	}
+	return result
+}
+
+func divideFloat(a, b float64) (float64, error) {
+	if b == 0.0 {
+		return 0.0, fmt.Errorf("cannot provide zero as second value")
+	}
+	return a / b, nil
 }
 func returnTrue() bool {
 	fmt.Println("Returning True")
@@ -432,7 +484,7 @@ func validateNumber(number float64) bool {
 	return math.Abs(number/math.Pow(math.Sqrt(number), 2)-1) < 0.001
 }
 
-/*func readRobots() {
+func readRobots() {
 	res, err := http.Get("http://www.google.com/robots.txt")
 	if err != nil {
 		log.Fatal(err)
@@ -443,4 +495,4 @@ func validateNumber(number float64) bool {
 		log.Fatal(err)
 	}
 	fmt.Printf("%s\n", robots)
-}*/
+}

@@ -7,7 +7,9 @@ import (
 	"math"
 	"net/http"
 	"reflect"
+	"runtime"
 	"strconv"
+	"sync"
 )
 
 /*
@@ -52,6 +54,12 @@ type Bird struct {
 	SpeedKPH float32
 	CanFly   bool
 }
+
+// WaitGroup
+var wg = sync.WaitGroup{}
+
+// Mutex
+var mutex = sync.RWMutex{}
 
 func main() {
 	var i int = 42
@@ -445,12 +453,42 @@ Loop: //Labels
 	}
 	fmt.Printf("\nThe result of Division is :%f\n", divideResult)
 
-	zeroResult, err := divideFloat(5.0, 0.0)
+	runtime.GOMAXPROCS(100)
+
+	wg.Add(1)
+	go sayHello()
+	wg.Wait()
+
+	/*zeroResult, err := divideFloat(5.0, 0.0)
 	if err != nil {
 		fmt.Println(err)
 		return
+	}*/
+
+	// go Routines
+	for i := 0; i < 10; i++ {
+		wg.Add(2)
+		go sayHelloCounter(i)
+		go increment(i)
 	}
-	fmt.Printf("\nThe result of zero Division is :%f\n", zeroResult)
+	wg.Wait()
+
+	//go Routines with Mutex
+
+	for i := 0; i < 10; i++ {
+		wg.Add(2)
+		mutex.RLock()
+		go sayHelloCounterwMutex(i)
+		mutex.Lock()
+		go incrementwMutex(i)
+	}
+	wg.Wait()
+
+	//ToDo experiment with more Methods
+
+	//Interface
+	//Go Routines
+
 }
 func sayMessage(msg string) {
 	fmt.Println(msg)

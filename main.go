@@ -453,7 +453,7 @@ Loop: //Labels
 	}
 	fmt.Printf("\nThe result of Division is :%f\n", divideResult)
 
-	runtime.GOMAXPROCS(100)
+	runtime.GOMAXPROCS(100) // By default we get 4
 
 	wg.Add(1)
 	go sayHello()
@@ -485,9 +485,9 @@ Loop: //Labels
 	wg.Wait()
 
 	//ToDo experiment with more Methods
-
+	// Understand Error Handling
+	// Understand Race Condition
 	//Interface
-	//Go Routines
 
 }
 func sayMessage(msg string) {

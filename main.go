@@ -489,6 +489,63 @@ Loop: //Labels
 	// Understand Race Condition
 	//Interface
 
+	// Channels
+
+	var waitGroup = sync.WaitGroup{}
+	channel1 := make(chan int) // only integer types would be sent by this channel.
+
+	// Simple Go routine with channel
+
+	waitGroup.Add(2)
+	go func() { // Receiving routine
+		i := <-channel1 // Receives the message from the channel
+		fmt.Println(i)
+		waitGroup.Done()
+	}()
+	go func() { // Sending routine
+		channel1 <- 42 // Sending the message via the channel
+		waitGroup.Done()
+	}()
+	waitGroup.Wait()
+
+	// Complex Go Routine
+	var waitGroup2 = sync.WaitGroup{}
+	channel2 := make(chan int)
+
+	for j := 0; j < 5; j++ {
+		waitGroup2.Add(2)
+		go func() { // Receiving routine
+			i := <-channel2 // Receives the message from the channel
+			fmt.Println(i)
+			waitGroup2.Done()
+		}()
+		go func() { // Sending routine
+			channel2 <- 36 // Sending the message via the channel
+			waitGroup2.Done()
+		}()
+	}
+	waitGroup2.Wait()
+
+	// Reading and writing can be done in same routine, but it is not advisable.
+
+	//Buffer Channel with controls on reading and writing
+	var waitGroup3 = sync.WaitGroup{}
+	channel3 := make(chan int)
+	waitGroup3.Add(2)
+	go func(channel3 <-chan int) { // Receiving routine
+		for i := range channel3 {
+			fmt.Println(i)
+		}
+		waitGroup3.Done()
+	}(channel3)
+	go func(channel3 chan<- int) { // Sending routine
+		channel3 <- 22  // Sending the message via the channel
+		channel3 <- 152 // Sending the message via the channel
+		close(channel3)
+		waitGroup3.Done()
+	}(channel3)
+	waitGroup3.Wait()
+
 }
 func sayMessage(msg string) {
 	fmt.Println(msg)

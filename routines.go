@@ -30,3 +30,14 @@ func incrementwMutex(counter int) {
 	mutex.Unlock()
 	wg.Done()
 }
+
+func logger() {
+	for {
+		select {
+		case entry := <-logCh:
+			fmt.Printf("%v - [%v] %v\n", entry.time.Format("2006-01-02T15:04:05"), entry.severity, entry.message)
+		case <-doneCh:
+			break
+		}
+	}
+}

@@ -10,6 +10,7 @@ import (
 	"runtime"
 	"strconv"
 	"sync"
+	"time"
 )
 
 /*
@@ -60,6 +61,21 @@ var wg = sync.WaitGroup{}
 
 // Mutex
 var mutex = sync.RWMutex{}
+
+const (
+	logInfo    = "INFO"
+	logWarning = "WARNING"
+	logError   = "ERROR"
+)
+
+type logEntry struct {
+	time     time.Time
+	severity string
+	message  string
+}
+
+var logCh = make(chan logEntry, 50)
+var doneCh = make(chan struct{})
 
 func main() {
 	var i int = 42
@@ -474,6 +490,8 @@ Loop: //Labels
 	wg.Wait()
 
 	//go Routines with Mutex
+	go logger()
+	logCh <- logEntry{time.Now(), logInfo, "App is starting"}
 
 	for i := 0; i < 10; i++ {
 		wg.Add(2)
@@ -545,6 +563,8 @@ Loop: //Labels
 		waitGroup3.Done()
 	}(channel3)
 	waitGroup3.Wait()
+
+	logCh <- logEntry{time.Now(), logInfo, "App is Ending"}
 
 }
 func sayMessage(msg string) {
